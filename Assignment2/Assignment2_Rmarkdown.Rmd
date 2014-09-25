@@ -1,0 +1,165 @@
+---
+title: "Assignment 2 - Introduction to Computational Finance and Financial Econometrics"
+author: "T Xu"
+date: "September 25, 2014"
+output: html_document
+---
+Question 1
+--------------------------------------------
+Hint: you can use the R functions pnorm and qnorm to answer these questions. 
+(5) Suppose X is a normally distributed random variable with mean 0.05 and variance (0.10)2. Compute the following. 
+a) $Pr(X>.10)$
+```{r}
+pnorm(0.1,mean=0.05,sd=0.1,lower.tail=F)
+```
+
+Question 2
+--------------------------------------------
+Suppose X is a normally distributed random variable with mean 0.05 and variance (0.10)2. Compute the following. 
+b) $Pr(X < −.10)$
+```{r}
+pnorm(-0.1,mean=0.05,sd=0.1,lower.tail=T)
+```
+
+Question 3
+--------------------------------------------
+Suppose X is a normally distributed random variable with mean 0.05 and variance (0.10)2. Compute the following. 
+c) $Pr(−0.05<X<0.15)$
+```{r}
+pnorm(0.15,mean=0.05,sd=0.1)-pnorm(-0.05,mean=0.05,sd=0.1)
+```
+
+Question 4
+--------------------------------------------
+Suppose X is a normally distributed random variable with mean 0.05 and variance (0.10)2. Compute the following. 
+
+d) 1% quantile, q.01
+```{r}
+qnorm(0.01,mean=0.05,sd=0.1)
+```
+
+Question 5
+--------------------------------------------
+Suppose X is a normally distributed random variable with mean 0.05 and variance (0.10)2. Compute the following. 
+e) 5% quantile, q.05
+```{r}
+qnorm(0.05,mean=0.05,sd=0.1)
+```
+
+Question 6
+--------------------------------------------
+Suppose X is a normally distributed random variable with mean 0.05 and variance (0.10)2. Compute the following. 
+f) 95% quantile, q.95
+```{r}
+qnorm(0.95,mean=0.05,sd=0.1)
+```
+
+Question 7
+--------------------------------------------
+Suppose X is a normally distributed random variable with mean 0.05 and variance (0.10)2. Compute the following. 
+g) 99% quantile, q.99
+```{r}
+qnorm(0.99,mean=0.05,sd=0.1)
+```
+
+Question 8
+--------------------------------------------
+Let X denote the monthly return on Microsoft Stock and let Y denote the monthly return on Starbucks stock. Assume that X∼N(0.05,(0.10)2) and Y∼N(0.025,(0.05)2). 
+Using a grid of values between –0.25 and 0.35, plot the normal curves for X and Y. Make sure that both normal curves are on the same plot.
+(5) Which stock has the higher risk?
+```{r}
+#install.packages('ggplot2', dep = TRUE)
+#install.packages("munsell")
+library(ggplot2)
+x <-seq(-0.25,0.35,by=0.001)
+X <- pnorm(x, mean=0.05, sd=0.1) #Microsoft
+Y <- pnorm(x, mean=0.025, sd=0.05) # Starbucks
+df <- data.frame(x,X,Y)
+# blue <- Microsoft; red <- Starbucks
+ggplot(df, aes(x)) + geom_line(aes(y=X),color="blue")+geom_line(aes(y=Y),color="red")
+```
+
+Question 9
+--------------------------------------------
+Let R denote the simple monthly return on Microsoft stock and let W0 denote the initial wealth to be invested over the month. Assume that R∼N(0.04,(0.09)2)) and that W0=$100,000
+(10) Determine the 1% and 5% value-at-risk (VaR) over the month on the investment. That is, determine the loss in investment value that may occur over the next month with 1% probability and with 5% probability.
+
+```{r}
+W0 <- 100000
+VaRR001 <- qnorm(0.01,mean=0.04,sd=0.09) * W0
+VaRR005 <- qnorm(0.05,mean=0.04,sd=0.09) * W0
+VaRR001
+VaRR005
+```
+
+Question 10
+--------------------------------------------
+Let the r denote the continuously compounded monthly return on Microsoft stock and let W0 denote the initial wealth to be invested over the month. Assume that r∼iid N(0.04,(0.09)2) and that W0=$100,000.
+(10) Determine the 1% and 5% value-at-risk (VaR) over the month on the investment. That is, determine the loss in investment value that may occur over the next month with 1% probability and with 5% probability. (Hint: compute the 1% and 5% quantile from the Normal distribution for r and then convert continuously compounded return quantile to a simple return quantile using the transformation R=er−1)
+
+```{r}
+W0 <- 100000
+VaRr <- function(q){
+  r <- qnorm(q,mean=0.04,sd=0.09)
+  exp(r)-1
+}
+VaRr001 <- VaRr(0.01) * W0
+VaRr005 <- VaRr(0.05) * W0
+VaRr001
+VaRr005
+```
+
+Question 11
+--------------------------------------------
+For the following questions: 
+
+Consider a one month investment in two Northwest stocks: Amazon and Costco. Suppose you buy Amazon and Costco at the end of September at PA,t−1=$38.23, PC,t−1=$41.11 and then sell at the end of October for PA,t=$41.29, PC,t=$41.74. (Note: these are actual closing prices for 2004 taken from Yahoo!)
+(10) What are the simple monthly returns for the two stocks?
+```{r}
+PA0 <- 38.23; PA1 <- 41.29
+PC0 <- 41.11; PC1 <- 41.74
+paste("Q11Amazon", PA1/PA0-1)
+paste("Q11Costco", PC1/PC0-1)
+```
+Question 12
+--------------------------------------------
+(10) What are the continuously compounded returns for the two stocks?
+```{r}
+paste("Q12Amazon", log(PA1)-log(PA0))
+paste("Q12Costco", log(PC1)-log(PC0))
+```
+Question 13
+--------------------------------------------
+(10) Suppose Amazon paid a $0.10 per share cash dividend at the end of October. What is the monthly simple total return on Amazon? What is the monthly dividend yield?
+```{r}
+ADiv <- 0.1
+paste("Q13 Total Return", (PA1+ADiv)/PA0-1)
+paste("Q12 Div Yield", ADiv/PA0)
+```
+
+Question 14
+--------------------------------------------
+(10) Suppose the monthly returns on Amazon from question 12 above are the same every month for 1 year. Compute the simple annual returns, as well as the continuously compounded annual returns.
+```{r}
+Q12Ret <- log(PA1)-log(PA0)
+paste("Q14 Simple Annual", exp(Q12Ret*12)-1)
+paste("Q14 Total Return", Q12Ret*12)
+```
+
+Question 15
+--------------------------------------------
+(10) At the end of September 2004, supposed you have $10,000 to invest in Amazon and Costco over the next month. If you invest $8,000 in Amazon and $2,000 in Costco, what are your portfolio shares, xA and xC.
+```{r}
+xA <- 8000
+xC <- 2000
+```
+
+Question 16
+--------------------------------------------
+(10) Continuing with the previous question, compute the monthly simple return on the portfolio. Assume than no dividends are paid.
+```{r}
+P0 <- xA + xC
+P1 <- xA*PA1/PA0 + xC*PC1/PC0
+P1/P0-1
+```
+
