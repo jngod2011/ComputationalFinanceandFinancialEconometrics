@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle: 'Assignment 4: Matrix Algebra'\nauthor: \"T Xu\"\ndate: \"Thursday, September 25, 2014\"\noutput: html_document\n---\n\nThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.\n\nWhen you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:\n\n```{r}\nA <- matrix(c(1,4,7,2,4,8,6,1,3),ncol=3,nrow=3,byrow = T)\nt(A)\nB <- matrix(c(4,4,0,5,9,1,2,2,5),ncol=3,nrow=3,byrow = T)\nt(B)\n```\n\nYou can also embed plots, for example:\n\n```{r, echo=FALSE}\nplot(cars)\n```\n\nNote that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.\n",
+    "created" : 1411663175404.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3188372487",
+    "id" : "C6F5D328",
+    "lastKnownWriteTime" : 1411663984,
+    "path" : "~/GitHub/ComputationalFinanceandFinancialEconometrics/Assignment4_MatrixAlgebra/Assignment4.Rmd",
+    "project_path" : "Assignment4.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}
