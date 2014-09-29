@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle: \"Assignment 4: Matrix Algebra - Introduction to Computational Finance and Financial Econometrics\"\nauthor: \"T Xu\"\ndate: \"Friday, September 26, 2014\"\noutput: html_document\n---\nQuestions 1 - 9 refer to the following matrices and vectors: \n$$\nA= \\left(\\begin{array}\\\n1&4&7\\\\\n2&4&8\\\\\n6&1&3\\\\\n\\end{array}\\right),\nB= \\left(\\begin{array}\\\n4&4&0\\\\\n5&9&1\\\\\n2&2&5\\\\\n\\end{array}\\right),\nx= \\left(\\begin{array}\\\n1\\\\\n2\\\\\n3\\\\\n\\end{array}\\right),\nx= \\left(\\begin{array}\\\n5\\\\\n2\\\\\n7\\\\\n\\end{array}\\right)\n$$\n\nQuestion 1\n-----------------\n(10) Compute the transpose of A.\n```{r}\nA <- matrix(c(1,4,7,2,4,8,6,1,3),ncol=3,nrow=3,byrow = T)\nt(A)\n```\nQuestion 2\n----------\n(10) Compute the transpose of B.\n```{r}\nB <- matrix(c(4,4,0,5,9,1,2,2,5),ncol=3,nrow=3,byrow = T)\nt(B)\n```\nQuestion 3\n-------------\n(5) Compute the transpose of x.\n```{r}\nx <- matrix(c(1,2,3))\nt(x)\n```\nQuestion 4\n---------------\n(5) Compute the transpose of y.\n```{r}\ny <- matrix(c(5,2,7))\nt(y)\n```\nQuestion 5\n------------\n(10) Compute A+B.\n```{r}\nA+B\n```\nQuestion 6\n----------------\n(10) Compute A−B.\n```{r}\nA-B\n```\n\nQuestion 7\n---------\n(10) Compute 2∗A\n```{r}\n2*A\n```\nQuestion 8\n-----------\n(10) Compute Ax.\n```{r}\nA %*% x\n```\n\nQuestion 9\n-----------\n(10) Compute y′Ax.\n```{r}\nt(y) %*% A %*% x\n```\n\nQuestion 10\n------------\n(10) Consider the system of equations: \n$$z1+z2=1,$$\n$$2z1+4z2=2$$\n\nWrite the system using matrix notation as $Az=b$ and solve for z.\n```{r}\nA <- matrix(c(1,2,1,4),ncol=2)\nb <- matrix(c(1,2))\nsolve(A,b) #calcualte z\n```\n\nQuestion 11\n------------------------\nConsider creating a portfolio of three assets denoted A, B and C. Assume the following information: \n$$\n\\mu= \\left(\\begin{array}\\\n0.01\\\\\n0.04\\\\\n0.02\\\\\n\\end{array}\\right),\n\\Sigma= \\left(\\begin{array}\\\n0.10 & 0.30 & 0.10\\\\\n0.30 & 0.15 & -0.20\\\\\n0.10 & -0.20 & 0.08\\\\\n\\end{array}\\right)\n$$\n(10) Compute the expected return for an equally weighted portfolio (i.e., xA=xB=xC=1/3).\n```{r}\nmu <- matrix(c(0.01,0.04,0.02))\nsigma <- matrix(c(0.1,.3,.1,.3,.15,-.2,.1,-.2,0.08),ncol=3)\nx <- matrix(c(1/3,1/3,1/3))\nt(x) %*% mu\n```\n\n\nQuestion 12\n-------------------\n(10) Continuing from the previous question, what is the variance for an equally weighted portfolio?\n```{r}\nt(x) %*% sigma %*% x\n```\n",
+    "created" : 1411741668989.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1379199474",
+    "id" : "D7681F1A",
+    "lastKnownWriteTime" : 1411741762,
+    "path" : "~/GitHub/ComputationalFinanceandFinancialEconometrics/Assignment4_MatrixAlgebra/Assignment4_MatrixAlgebra.Rmd",
+    "project_path" : "Assignment4_MatrixAlgebra.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

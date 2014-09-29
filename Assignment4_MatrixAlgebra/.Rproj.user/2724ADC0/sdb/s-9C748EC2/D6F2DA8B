@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle: 'Assignment 4: R'\nauthor: \"T Xu\"\ndate: \"Friday, September 26, 2014\"\noutput: html_document\n---\n\n",
+    "created" : 1411738894485.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3503361608",
+    "id" : "D6F2DA8B",
+    "lastKnownWriteTime" : 31244173393002613,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}
