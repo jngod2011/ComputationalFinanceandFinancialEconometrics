@@ -88,9 +88,10 @@ You would like to test for each μi (i= VBLTX, FMAGX and SBUX):
 H0:μi=0 vs. H1:μi≠0, using a 5% significance level. In other words, you would like to investigate whether the mean return is significantly different from zero according to the data. Perform the test using the t-statistic as well as the 95% confidence. You can use the R function t.test() for this problem.
 ```{r}
 # The "all_returns" zoo object is preloaded in your workspace
-t.test(all_returns[,"SBUX"])
+"t.test(all_returns[,"SBUX"])
 t.test(all_returns[,"VBLTX"])
-t.test(all_returns[,"FMAGX"])
+t.test(all_returns[,"FMAGX"])"
+sapply(all_returns,FUN=t.test)
 ```
 Hypothesis test for the correlation
 ------------------------------------
@@ -104,6 +105,7 @@ H0:ρij=0 vs. H1:ρij≠0, using a 5% significance level. In other words, you wo
 cor.test(x=all_returns[,"VBLTX"], y=all_returns[,"SBUX"])
 cor.test(x=all_returns[,"FMAGX"], y=all_returns[,"SBUX"])
 cor.test(x=all_returns[,"VBLTX"], y=all_returns[,"FMAGX"])
+
 ```
 
 Normality of the asset returns
@@ -115,9 +117,10 @@ H0:rit ~ normal vs. H1:rit ~ not normal using a 5% significance level, with $i=$
 # The "all_returns" zoo object is preloaded in your workspace
 
 # Test the normality of the returns of VBLTX
-jarque.bera.test(all_returns[,"VBLTX"])
+"jarque.bera.test(all_returns[,"VBLTX"])
 jarque.bera.test(all_returns[,"SBUX"])
-jarque.bera.test(all_returns[,"FMAGX"])
+jarque.bera.test(all_returns[,"FMAGX"])"
+sapply(all_returns,jarque.bera.test)
 ```
 Bootstrapping
 -------------------------
@@ -126,7 +129,7 @@ In the code on the right, the function mean_boot is defined. It estimates the me
 In R, the boot package offers the boot function for convenient bootstrapping. As a first argument, you should supply the data. As a second argument, the function used to estimate the parameter of interest (the mean_boot function in this case) and as a third argument, the number of bootstrap samples that you would like to create. The output of the function should be an object of the class "boot".
 This is the final exercise of this lab on DataCamp. If you would like to explore this topic more in depth, you can certainly have a look at "lab7.R" under the resources tab on Coursera.
 ```{r}
-library("boot")
+library(boot)
 # Function for bootstrapping sample mean: 
 mean_boot = function(x, idx) {
   ans = mean(x[idx])
